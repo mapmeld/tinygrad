@@ -97,8 +97,9 @@ class Adamax(Adam):
     self.t = self.t + 1
     a = self.lr / (1.0 - self.b1**self.t)
     for i, t in enumerate(self.params):
-      self.m[i] = self.b1 * self.m[i] * a + (1.0 - self.b1) * t.grad * a
-      self.infs[i] = (self.b2 * self.infs[i]) * a + (t.grad.abs() + self.eps) * a
+      self.m[i] = self.b1 * self.m[i] + (1.0 - self.b1) * t.grad
+      self.infs[i] = (self.b2 * self.infs[i]) + (t.grad.abs() + self.eps)
+      t.assign(t.detach() - a * self.m[i].div(self.infs[i]))
       #self.v[i] = amax(norm_buf)
     self.realize(self.m + self.infs)
 
