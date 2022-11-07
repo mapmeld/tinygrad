@@ -44,7 +44,10 @@ if __name__ == "__main__":
 
   parameters = get_parameters(model)
   print("parameter count", len(parameters))
-  optimizer = optim.Adam(parameters, lr=0.001)
+  #optimizer = optim.Adam(parameters, lr=0.001)
+  optimizer = optim.Adan(parameters, lr=0.001)
+  # optimizer = optim.Adamax(parameters, lr=0.001)
+  # optimizer = optim.ASGD(parameters, lr=0.001)
 
   BS, steps = int(os.getenv("BS", "64" if TINY else "16")), int(os.getenv("STEPS", "2048"))
   print("training with batch size %d for %d steps" % (BS, steps))

@@ -131,7 +131,7 @@ if __name__ == "__main__":
     [x.gpu_() for x in params]
 
   for lr, epochs in zip(lrs, epochss):
-    optimizer = optim.Adam(model.parameters(), lr=lr)
+    optimizer = optim.Adan(model.parameters(), lr=lr)
     for epoch in range(1,epochs+1):
       #first epoch without augmentation
       X_aug = X_train if epoch == 1 else augment_img(X_train)
